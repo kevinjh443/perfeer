@@ -56,8 +56,8 @@ foreach($rs as $item) {
     array_push($yaxis, $item['score']);
 }
 
-$Line = new ChartJS_Line('example', 500, 500);
-$Line->addLine($yaxis);
+$Line = new ChartJS_Line('Antutu historian data', 500, 500);
+$Line->addLine($yaxis, [], "Antutu Historian Data");
 $Line->addLabels($xaxis);
 
 echo "<center>".$Line."</center>";
