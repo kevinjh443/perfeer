@@ -38,7 +38,7 @@
 </body>
 <script>
 
-  var url = $('#url').val('http://127.0.0.1/'); //请求地址
+  var url = $('#url').val('http://172.24.218.88/perfeer/server/Public/perfeer/'); //请求地址//Attention: js为客户端执行代码，若联网请填写服务器实际IP
   var api = $('#api').val('Default.Index');                    //请求接口
 
   //使用普通的post请求
@@ -46,17 +46,17 @@
     var url = $('#url').val();
     var api = $('#api').val();
     var param1 = $('#param1').val();
-    var param2 = $('#param2').val();
-    var param3 = $('#param3').val();
+//    var param2 = $('#param2').val();
+//    var param3 = $('#param3').val();
     var value1 = $('#value1').val();
-    var value2 = $('#value2').val();
-    var value3 = $('#value3').val();
+//    var value2 = $('#value2').val();
+//    var value3 = $('#value3').val();
     var rs_data = $('#rs_data').val();
 
     var data = {};
     data[param1] = value1;
-    data[param2] = value2;
-    data[param3] = value3;
+//    data[param2] = value2;
+//    data[param3] = value3;
     query_post(url, api, data, function(rs){
       //回调函数
       if(rs.ret == 200){
@@ -77,13 +77,13 @@
     var url = $('#url').val();
     var api = $('#api').val();
     var param1 = $('#param1').val();
-    var param2 = $('#param2').val();
-    var param3 = $('#param3').val();
+//    var param2 = $('#param2').val();
+//    var param3 = $('#param3').val();
     var value1 = $('#value1').val();
-    var value2 = $('#value2').val();
-    var value3 = $('#value3').val();
+//    var value2 = $('#value2').val();
+//    var value3 = $('#value3').val();
     //拼接GET参数
-    var data = '&' + param1 + '=' + value1 + '&' + param2 + '=' + value2 + '&' + param3 + '=' + value3;
+    var data = '&' + param1 + '=' + value1; //+ '&' + param2 + '=' + value2 + '&' + param3 + '=' + value3;
 
     query_get(url, api, data, function(rs){
       //回调函数
