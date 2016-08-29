@@ -14,14 +14,14 @@ class Api_Upload extends PhalApi_Api {
      */
     public function getRules() {
         return array(
-            'upload' => array(
+            'uploadAntutuExcel' => array(
                 'file' => array(
                     'name' => 'file',
                     'type' => 'file',
                     'min' => 0,
                     'max' => 1024 * 1024,
-                    'range' => array('image/jpg', 'image/jpeg', 'image/png'),
-                    'ext' => array('jpg', 'jpeg', 'png')
+                   // 'range' => array('image/jpg', 'image/jpeg', 'image/png'),
+                    'ext' => array('xls', 'xlsx')
                 ),
             ),
         );
@@ -32,7 +32,7 @@ class Api_Upload extends PhalApi_Api {
      * @return string $url 绝对路径
      * @return string $file 相对路径，用于保存至数据库，按项目情况自己决定吧
      */
-    public function upload() {
+    public function uploadAntutuExcel() {
 
         DI()->loader ->addDirs('Library');
 
@@ -41,13 +41,22 @@ class Api_Upload extends PhalApi_Api {
         //设置上传路径 设置方法参考3.2
         DI()->ucloud->set('Upload',date('Y/m/d'));
 
+        $filename = date('YmdHis');
+        $filename = 'AntutuTestData_'.$filename;
         //新增修改文件名设置上传的文件名称
-        DI()->ucloud->set('file_name', 'file_name_hgg');
+        DI()->ucloud->set('file_name', $filename);
 
         //上传表单名
         $rs = DI()->ucloud->upfile($this->file);
 
-        //$rs = array("success" => true);
+        $this -> importAntutuExcelToDB('../Perfeer/Upload/'.$rs['file']);//attention the path
+
         return $rs;
+    }
+
+    private function importAntutuExcelToDB($file_path) {
+
+        $domain = new Domain_Antutu();
+        return $domain->importAntutuExcelToDB($file_path);
     }
 }

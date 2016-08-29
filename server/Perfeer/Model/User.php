@@ -39,7 +39,7 @@ class Model_User extends PhalApi_Model_NotORM {
             $rs['code'] = -1;
             $rs['msg'] = "cannot find this user : ".$username.". pealse contacts with admin to add user";
         } else {
-            $this->getORM()->where('username = ? AND password = ?', $username, $password)->update(array('online' => 0));
+            $this->getORM()->where('username = ?', $username)->update(array('online' => 0));
             $data['online'] = 0;
             $rs['info'] = $data;
         }
@@ -49,8 +49,11 @@ class Model_User extends PhalApi_Model_NotORM {
 
     protected function getTableName($id) {
         return 'user';
-        /**
-         * CREATE TABLE IF NOT EXISTS `user` (
+    }
+
+    protected function getCreateTableSQL() {
+        return "
+        CREATE TABLE IF NOT EXISTS `user` (
         `id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id' ,
         `username`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'TESTER' COMMENT '用户名' ,
         `password`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '12345678' COMMENT '用户密码' ,
@@ -67,6 +70,6 @@ class Model_User extends PhalApi_Model_NotORM {
         ROW_FORMAT=DYNAMIC
         DELAY_KEY_WRITE=0
         ;
-         */
+        ";
     }
 }

@@ -12,6 +12,10 @@ class Api_Default extends PhalApi_Api {
             'index' => array(
                 'username' 	=> array('name' => 'username', 'default' => 'PHPer', ),
             ),
+
+            'test' => array(
+                'username' 	=> array('name' => 'username', 'default' => 'PHPer', ),
+            ),
         );
 	}
 	
@@ -30,4 +34,10 @@ class Api_Default extends PhalApi_Api {
             'time' => $_SERVER['REQUEST_TIME'],
         );
 	}
+
+    public function test() {
+        //$domain = new Domain_Antutu();
+        //$data = $domain->exportAntutuExcelEmpty();
+        return array();
+    }
 }

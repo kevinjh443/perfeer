@@ -27,10 +27,34 @@ class Model_Antutu extends PhalApi_Model_NotORM {
         return $rs;
     }
 
+    public function importAntutuDataToDB($data) {
+        $insert_data = array();
+        foreach($data as $item) {
+            if($item['A'] == 'version_time' || $item['A'] == 'test_time') {
+                continue;// for test here, 正式版本要改
+            }
+            $insert_data[$item['A']] = $item['C'];
+        }
+        //再验证是否数据正确。TODO
+
+        //echo var_dump($insert_data);
+        $rs = $this->getORM()
+            ->insert($insert_data);
+        $id = $this->getORM()->insert_id();
+        return array('insert_id' => $id);
+    }
+
+    public function exportAntutuExcelEmpty() {
+        return $this->getTableFieldList();
+    }
+
     protected function getTableName($id) {
         return 'antutu_score_all';
-        /*
-         *CREATE TABLE IF NOT EXISTS `antutu_score_all` (
+    }
+
+    protected function getCreateTableSQL() {
+        return "
+        CREATE TABLE IF NOT EXISTS `antutu_score_all` (
             `id`  int(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
             `product` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'Flash3' COMMENT '测试项目' ,
             `version_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'user' COMMENT 'user userdebug eng version' ,
@@ -64,6 +88,6 @@ class Model_Antutu extends PhalApi_Model_NotORM {
             ROW_FORMAT=FIXED
             DELAY_KEY_WRITE=0
             ;
-         */
+        ";
     }
 }
