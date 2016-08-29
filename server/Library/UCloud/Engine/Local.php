@@ -11,7 +11,7 @@ class UCloud_Engine_Local{
      * 上传文件根目录
      * @var string
      */
-    private $rootPath = '../upload/';
+    private $rootPath = '../Perfeer/Upload/';//kevinjh443 config #upload
 
     /**
      * 本地上传错误信息
