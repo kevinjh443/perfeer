@@ -17,10 +17,10 @@
 </div>
 
 <div id="content">
-    <div class="antutu-container" style="width:30%; height: 20%;">
+    <div class="antutu-container" style="width:50%; height: 50%;">
         <div id="placeholder" class="antutu-placeholder"></div>
         <center>
-            <canvas id="myChart" width="100" height="100"></canvas>
+            <canvas id="myChart" width="500" height="500"></canvas>
         </center>
     </div>
 </div>
@@ -50,11 +50,11 @@
         if(debug == true){
             console.log(data);
         }
-        query_post(url, api, data, function(rs){draw(rs)});
+        query_post(url, api, data, draw);
 
     }
 
-    function draw(rs) {
+    var draw = function(rs) {
         if(rs.ret != 200){
             //如果失败打印失败信息并且做出相应的处理
             alert(rs.msg);
