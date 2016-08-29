@@ -122,4 +122,47 @@ abstract class PhalApi_Model_NotORM implements PhalApi_Model {
             }
         }
     }
+
+    /**
+     * the line of create this table SQL command
+     * @author: kevinjh443@163.com
+     * @return mixed
+     */
+    abstract protected function getCreateTableSQL();
+
+    /**
+     * get the mirror table of field and comment
+     * @return array
+     */
+    protected function getTableFieldList() {
+        $command = $this->getCreateTableSQL();
+        $command_array = explode(" ,", $command);
+        $command = null;
+        $command_lenght = sizeof($command_array) - 1;
+        $line_field = array();
+
+        for($i = 1; $i < $command_lenght; $i++) {
+            $line = $command_array[$i];
+            //echo $i.$line."<br>";
+            $line_field_temp = explode('`', $line);
+            if (sizeof($line_field_temp) > 2) {
+                $line_field_name = $line_field_temp[1];
+            } else {
+                $line_field_name = $line_field_temp[0];
+            }
+
+            $line_field_temp = explode('COMMENT ', $line);
+            //var_dump($line_field_temp);
+            if (sizeof($line_field_temp) >= 2) {
+                $line_field_comment = $line_field_temp[1];
+            } else {
+                $line_field_comment = $line_field_temp[0];
+            }
+
+            array_push($line_field, array('field_name'=>$line_field_name, 'field_comment'=>$line_field_comment));
+        }
+        $command_array = null;
+        //echo var_dump($line_field);
+        return $line_field;
+    }
 }
