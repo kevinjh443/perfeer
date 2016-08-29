@@ -1,2 +1,17 @@
-      `name` VARCHAR(45) NULL,
-      `note` VARCHAR(45) NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+`id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id' ,
+`username`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'TESTER' COMMENT '用户名' ,
+`password`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '12345678' COMMENT '用户密码' ,
+`online`  bit(1) NULL DEFAULT b'0' COMMENT '在线情况' ,
+`permission`  int(11) NULL DEFAULT 0 COMMENT '权限等级' ,
+`email`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱' ,
+`department`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=MyISAM
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+CHECKSUM=0
+ROW_FORMAT=DYNAMIC
+DELAY_KEY_WRITE=0
+;

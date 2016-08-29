@@ -124,3 +124,23 @@ INSERT INTO `antutu_score_all` (`id`, `product`, `version_type`, `version`, `ver
 INSERT INTO `antutu_score_all` (`id`, `product`, `version_type`, `version`, `version_time`, `test_time`, `tester_email`, `review_tester_email`, `showing_valid`, `score`, `3d`, `3d_marooned`, `3d_garden`, `ux`, `ux_data_secure`, `ux_data_process`, `ux_strategy_games`, `ux_image_process`, `ux_io_performance`, `cpu`, `cpu_mathematics`, `cpu_common_use`, `cpu_multi_core`, `ram`) VALUES (3, 'Flash3', 'user', 'A63', NULL, NULL, NULL, NULL, '', 93108, 18356, 10663, 7693, 37291, 7180, 5009, 9558, 9878, 6666, 26786, 9521, 7567, 9848, 5754);
 INSERT INTO `antutu_score_all` (`id`, `product`, `version_type`, `version`, `version_time`, `test_time`, `tester_email`, `review_tester_email`, `showing_valid`, `score`, `3d`, `3d_marooned`, `3d_garden`, `ux`, `ux_data_secure`, `ux_data_process`, `ux_strategy_games`, `ux_image_process`, `ux_io_performance`, `cpu`, `cpu_mathematics`, `cpu_common_use`, `cpu_multi_core`, `ram`) VALUES (4, 'Flash3', 'user', 'A64', NULL, NULL, NULL, NULL, '', 92108, 18356, 10663, 15674, 37291, 7180, 5009, 9558, 9878, 6666, 26786, 9521, 7567, 9848, 5754);
 
+
+
+
+CREATE TABLE IF NOT EXISTS `user` (
+`id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id' ,
+`username`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'TESTER' COMMENT '用户名' ,
+`password`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '12345678' COMMENT '用户密码' ,
+`online`  bit(1) NULL DEFAULT b'0' COMMENT '在线情况' ,
+`permission`  int(11) NULL DEFAULT 0 COMMENT '权限等级' ,
+`email`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱' ,
+`department`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=MyISAM
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+CHECKSUM=0
+ROW_FORMAT=DYNAMIC
+DELAY_KEY_WRITE=0
+;
