@@ -23,6 +23,8 @@ class Api_Upload extends PhalApi_Api {
                    // 'range' => array('image/jpg', 'image/jpeg', 'image/png'),
                     'ext' => array('xls', 'xlsx')
                 ),
+                'username' 	=> array('name' => 'username', 'min' => 6, 'require' => true, 'desc' => '用户名' ),
+                'password' 	=> array('name' => 'password', 'min' => 6, 'require' => true, 'desc' => '用户登录密码' ),
             ),
         );
     }
@@ -49,14 +51,15 @@ class Api_Upload extends PhalApi_Api {
         //上传表单名
         $rs = DI()->ucloud->upfile($this->file);
 
-        $this -> importAntutuExcelToDB('../Perfeer/Upload/'.$rs['file']);//attention the path
+        $import_status = $this -> importAntutuExcelToDB('../Perfeer/Upload/'.$rs['file'], $this->username, $this->password);//attention the path
+        array_push($rs, $import_status);
 
         return $rs;
     }
 
-    private function importAntutuExcelToDB($file_path) {
+    private function importAntutuExcelToDB($file_path, $username, $password) {
 
         $domain = new Domain_Antutu();
-        return $domain->importAntutuExcelToDB($file_path);
+        return $domain->importAntutuExcelToDB($file_path, $username, $password);
     }
 }

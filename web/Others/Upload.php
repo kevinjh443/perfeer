@@ -29,6 +29,8 @@
     <form action="http://172.24.218.88/perfeer/server/Public/?service=Upload.UploadAntutuExcel" method="post"
           enctype="multipart/form-data">
         <input type="file" id="file" class="file" name="file" onchange="checkFormat()">
+        User name : <input type="text" id="username" class="username" name="username">
+        Password : <input type="text" id="password" class="password" name="password">
         <input type="submit" value="提交"/>
     </form>
 </center>
