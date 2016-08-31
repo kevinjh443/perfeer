@@ -7,7 +7,7 @@
  */
 
 $product = $_GET['product'] ? $_GET['product'] : "Flash3";
-$host = "http://172.24.218.88/perfeer/server/Public/";
+$host = "http://172.24.218.88/dev/perfeer/server/Public/";
 $api = "Antutu.GetDetailInfo";
 
 ?>

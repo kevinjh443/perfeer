@@ -10,7 +10,7 @@ return array(
     'servers' => array(
         'db_perfeer' => array(                         //服务器标记
             'host'      => 'localhost',             //数据库域名
-            'name'      => 'perfeer',               //数据库名字
+            'name'      => 'dev_perfeer',               //数据库名字
             'user'      => 'root',                  //数据库用户名
             'password'  => 'Aa123456',	                    //数据库密码
             'port'      => '3306',                  //数据库端口
