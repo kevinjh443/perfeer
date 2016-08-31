@@ -26,7 +26,7 @@ $api = "Antutu.GetDetailInfo";
     <script language="javascript" src="./Library/chart.js/Chart.min.js"></script>
 
     <style>
-        .antutu-container {width:48%; height: 48%; padding-top: 5%}
+        .antutu-container {width:98%; height: 48%; padding-top: 5%}
     </style>
 
 </head>
@@ -40,29 +40,10 @@ $api = "Antutu.GetDetailInfo";
 <div id="header">
     <h2>Performance Antutu Score</h2>
     <h3>-<?php echo $product;?></h3>
+    <h4>--<a href="./Tables/Antutu.php" target="_blank">Table for detail data</a></h4>
 </div>
 
 <div id="content">
-    <div class="antutu-container">
-        <canvas id="antutu0" width="30%" height="30%"></canvas>
-    </div>
-
-    <div class="antutu-container">
-        <canvas id="antutu1" width="30%" height="30%"></canvas>
-    </div>
-
-    <div class="antutu-container">
-        <canvas id="antutu_ux" width="30%" height="30%"></canvas>
-    </div>
-
-    <div class="antutu-container">
-        <canvas id="antutu_cpu" width="30%" height="30%"></canvas>
-    </div>
-
-    <div class="antutu-container">
-        <canvas id="antutu_ram" width="30%" height="30%"></canvas>
-    </div>
-
 
 </div>
 
@@ -82,7 +63,9 @@ $api = "Antutu.GetDetailInfo";
     var url = <?php echo "'".$host."'";?>; //请求地址
     var api = <?php echo "'".$api."'";?>;                    //请求接口
 
-    //使用普通的post请求
+    /**
+     * 使用普通的post请求
+     */
     function post(){
         var data = {};
         data['product'] = <?php echo "'".$product."'";?>;
@@ -90,16 +73,24 @@ $api = "Antutu.GetDetailInfo";
         if(debug == true){
             console.log(data);
         }
-        query_post(url, api, data, draw);
+        query_post(url, api, data, readyDraw);
     }
 
-    var draw = function(rs) {
+    /**
+     * ready to draw chart
+     */
+    var readyDraw = function(rs) {
         if(rs.ret != 200){
             //如果失败打印失败信息并且做出相应的处理
             alert(rs.msg);
             return;
         }
         var info_count = rs.data.info.length;
+        if (info_count <= 0) {
+            //var content = document.getElementById("content");
+            alert("have no any data in this product!");
+            return;
+        }
 
         //遍历json数组
         var xaxis = [];
@@ -120,27 +111,30 @@ $api = "Antutu.GetDetailInfo";
         });
 
         var showingID = "antutu0";
-        //createDIV(showingID);
-        showingLine(xaxis, yaxis, showingID, "Total Score");
+        createDIV(showingID);
+        drawLineChart(xaxis, yaxis, showingID, "Total Score");
 
         showingID = "antutu1";
-       // createDIV(showingID);
-        showingLine(xaxis, yaxis_3d, showingID, "3D Score");
+        createDIV(showingID);
+        drawLineChart(xaxis, yaxis_3d, showingID, "3D Score");
 
         showingID = "antutu_ux";
-        // createDIV(showingID);
-        showingLine(xaxis, yaxis_ux, showingID, "UX Score");
+        createDIV(showingID);
+        drawLineChart(xaxis, yaxis_ux, showingID, "UX Score");
 
         showingID = "antutu_cpu";
-        // createDIV(showingID);
-        showingLine(xaxis, yaxis_cpu, showingID, "CPU Score");
+        createDIV(showingID);
+        drawLineChart(xaxis, yaxis_cpu, showingID, "CPU Score");
 
         showingID = "antutu_ram";
-        // createDIV(showingID);
-        showingLine(xaxis, yaxis_ram, showingID, "RAM Score");
+        createDIV(showingID);
+        drawLineChart(xaxis, yaxis_ram, showingID, "RAM Score");
     };
 
-    var showingLine = function(xaxis, yaxis, showingID, title) {
+    /**
+     * draw line chart
+     */
+    var drawLineChart = function(xaxis, yaxis, showingID, title) {
         var data = {
             labels: xaxis,
             datasets: [
@@ -173,21 +167,26 @@ $api = "Antutu.GetDetailInfo";
     };
 
 
+    /**
+     * when page ready, auto running here
+     */
     window.onload = function(){
         post();
     };
 
 
+    /**
+     * create the div to show chart
+     * @param showingID
+     */
     var createDIV = function(showingID){
-        var parentdiv=$('<div></div>');        //创建一个父div
-        //parentdiv.attr('id', showingID);        //给父div设置id
-        parentdiv.addclass('antutu-container');    //添加css样式
-
-        var childdiv=$('<canvas></canvas>');        //创建一个子div
-        childdiv.attr('id', showingID);            //给子div设置id
-        childdiv.appendto(parentdiv);        //将子div添加到父div中
-
-        parentdiv.appendto($('#content'));            //将父div添加到content中
+        var openDiv = document.createElement("div");
+        openDiv.className = "antutu-container";
+        //openDiv.innerHTML = showingID;
+        var openCanvas = document.createElement("canvas");
+        openCanvas.id = showingID;
+        openDiv.appendChild(openCanvas);
+        $("#content").append(openDiv);
     }
 
 </script>
