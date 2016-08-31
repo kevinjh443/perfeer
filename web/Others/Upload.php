@@ -7,6 +7,10 @@
  * style="display:none"
  */
 
+$host = "http://172.24.218.88/perfeer/server/Public/";
+$api_download = "Antutu.ExportAntutuExcelEmpty";
+$api_upload = "Upload.UploadAntutuExcel";
+
 ?>
 
 <!DOCTYPE html>
@@ -20,13 +24,19 @@
 </head>
 <body>
 
+<div align="right" style="padding-top: 5%; padding-right: 5%">
+    <form action="<?=$host?>?service=<?=$api_download?>" method="post">
+        <input type="submit" value="Download Antutu Data Template"/>
+    </form>
+</div>
+
 <div id="header">
     <h2>Upload</h2>
 </div>
 <br><br><br><br>
 
 <center>
-    <form action="http://172.24.218.88/perfeer/server/Public/?service=Upload.UploadAntutuExcel" method="post"
+    <form action="<?=$host?>?service=<?=$api_upload?>" method="post"
           enctype="multipart/form-data">
         <input type="file" id="file" class="file" name="file" onchange="checkFormat()">
         User name : <input type="text" id="username" class="username" name="username">
