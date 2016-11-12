@@ -22,6 +22,6 @@ return array(
      */
     'UCloud' => array(
         //对应的文件路径
-        'host' => 'http://172.24.218.88/perfeer/server/Perfeer/Upload'//kevinjh443 config #upload
+        'host' => 'http://172.24.218.88/dev/perfeer/server/Perfeer/Upload'//kevinjh443 config #upload
     ),
 );

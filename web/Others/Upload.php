@@ -7,7 +7,7 @@
  * style="display:none"
  */
 
-$host = "http://172.24.218.88/perfeer/server/Public/";
+$host = "http://172.24.218.88/dev/perfeer/server/Public/";
 $api_download = "Antutu.ExportAntutuExcelEmpty";
 $api_upload = "Upload.UploadAntutuExcel";
 
